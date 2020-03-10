@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/bootstrap.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+  
+
+
+    {% if title %}
+        <meta charset="UTF-8">
+        <title> Tweebook - {{title}} </title>
+    {% else %}
+        <title> Tweebook </title>
+    {% endif %}
+
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'blog_home' %}"> POP Atomic </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"> </span>
+
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog_home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'about_page' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'gallery_page' %}">Gallery</a>
+              <a class="nav-item nav-link" href="{% url 'announcement' %}">Announcements</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'post_create' %}">New Post</a>
+                {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+          {% block content %}
+
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Acts Two Church</h3>
+            <p class='text-muted'>One Church, One Year, One Member
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Announcements</li><!--  put announcement contents here  -->
+                <li class="list-group-item list-group-item-light">Almanac</li>
+              </ul> 
+          </div>
+          <hr>  
+          <video class=" list-group list-group-item list-group-item-light" src="http://www.youtube.com" autobuffer autoloop loop controls poster="/images/video.png"></video>
+        </div>
+      </div>
+    </main>
+<!-- Footer -->
+<footer class="footer">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-12 py-5">
+        <div class="mb-5 flex-center">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3"> © 2019 Copyright:
+    <a > micKeyDev </a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"> <!-- on click should lead to the profile of author -->
+                  {{ post.author }}
+              </a>
+              <small class="text-muted">
+                  {{ post.date_posted }}
+              </small>
+            </div>
+            <h2>
+                <a class="article-title" href="{% url 'post_detail' post.id %}">
+                {{ post.title }}
+                </a>
+            </h2>
+            <p class="article-content">
+                {{ post.content }}
+            </p>
+          </div>
+        </article>
+  {% endfor %}
+
+{% endblock content %}

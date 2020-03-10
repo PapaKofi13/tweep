@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+{% block content %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src=" {{ object.author.profile.image.url }} " alt="">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">
+                  {{ object.author }}
+              </a>
+              {% if object.author == user %}
+              <a class="mr-2" href="{% url 'post_update' post.id %}">
+                  Update Post
+              </a>
+<!--               <a class="mr-2" href="{% url 'post_delete' post.id %}">
+                  Delete Post
+              </a> -->
+              {% endif %}
+              <small class="text-muted">
+                  {{ object.date_objected }}
+              </small>
+            </div>
+            <h2 class="article-title">
+                {{ object.title }}
+            </h2>
+            <p class="article-content">
+                {{ object.content }}
+            </p>
+          </div>
+        </article>
+{% endblock content %}
+
+
+<!-- #remove video from this page -->
